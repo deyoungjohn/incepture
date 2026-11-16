@@ -15,3 +15,8 @@ python3 -m http.server 8000
 - `shader.js`: the background shader (WebGL1). Falls back to a CSS gradient without WebGL and renders a single still frame under `prefers-reduced-motion`
 - `fonts/`: Inter, self-hosted (SIL Open Font License)
 - `og.jpg`: link preview image
+- `vercel.json`: cache and security headers for Vercel
+
+## Deploy
+
+Hosted on Vercel as a static site: framework preset "Other", no build command, output directory left at the repo root.
