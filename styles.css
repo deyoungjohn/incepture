@@ -1,0 +1,290 @@
+/* Inter (variable: weight + optical size), self-hosted. See fonts/LICENSE.txt */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("fonts/inter-latin.woff2") format("woff2");
+}
+
+:root {
+  color-scheme: dark;
+
+  /* Dusk palette: warm black ground, bone type, one ember accent. */
+  --ink: #0c0a09;
+  --bone: #f3ece4;
+  --stone: #b0a69b;
+  --ash: #8a8178;
+  --ember: #f2a277;
+  --line: rgb(243 236 228 / 0.14);
+  --glass: rgb(12 10 9 / 0.62);
+
+  --gutter: clamp(1.25rem, 4vw, 3.5rem);
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  background: var(--ink);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100%;
+  margin: 0;
+  color: var(--bone);
+  /* Shown until the shader's first frame, and kept if WebGL is unavailable. */
+  background:
+    radial-gradient(120% 90% at 88% 8%, rgb(150 62 34 / 0.5) 0%, rgb(60 26 18 / 0.3) 38%, transparent 68%),
+    radial-gradient(90% 70% at 100% 70%, rgb(24 32 46 / 0.6) 0%, transparent 70%),
+    var(--ink);
+  background-attachment: fixed;
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-size: 1rem;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--ember);
+  color: var(--ink);
+}
+
+p,
+h1 {
+  margin: 0;
+}
+
+/* ---------- Shader canvas ---------- */
+
+.field {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  opacity: 0;
+  transition: opacity 1.4s ease;
+  pointer-events: none;
+}
+
+.field.is-live {
+  opacity: 1;
+}
+
+/* ---------- Page frame ---------- */
+
+.page {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding:
+    max(var(--gutter), env(safe-area-inset-top))
+    max(var(--gutter), env(safe-area-inset-right))
+    max(var(--gutter), env(safe-area-inset-bottom))
+    max(var(--gutter), env(safe-area-inset-left));
+}
+
+/* ---------- Header ---------- */
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.brand-mark {
+  width: 1.125rem;
+  height: 1.125rem;
+  color: var(--ember);
+}
+
+.gh {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0 1rem 0 0.875rem;
+  border: 1px solid rgb(243 236 228 / 0.2);
+  border-radius: 999px;
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(14px) saturate(1.2);
+  backdrop-filter: blur(14px) saturate(1.2);
+  color: var(--bone);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  transition:
+    border-color 0.25s var(--ease),
+    background-color 0.25s var(--ease),
+    color 0.25s var(--ease);
+}
+
+.gh-mark {
+  width: 1.0625rem;
+  height: 1.0625rem;
+}
+
+.gh-arrow {
+  width: 0.6875rem;
+  height: 0.6875rem;
+  color: var(--stone);
+  transition:
+    transform 0.25s var(--ease),
+    color 0.25s var(--ease);
+}
+
+.gh:hover {
+  border-color: rgb(242 162 119 / 0.6);
+  background: rgb(12 10 9 / 0.78);
+}
+
+.gh:hover .gh-arrow {
+  color: var(--ember);
+  transform: translate(2px, -2px);
+}
+
+/* Two-tone ring so focus stays visible over both the dark and the lit areas. */
+.gh:focus-visible {
+  outline: 2px solid var(--bone);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 3px var(--ink);
+}
+
+/* ---------- Hero ---------- */
+
+.hero {
+  align-self: end;
+  max-width: 62rem;
+  padding-block: clamp(3rem, 10vh, 6rem) clamp(2rem, 6vh, 3.5rem);
+}
+
+h1 {
+  max-width: 15ch;
+  font-size: clamp(2.5rem, 1.1rem + 6.2vw, 6rem);
+  font-weight: 560;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+.lede {
+  max-width: 34rem;
+  margin-top: clamp(1.25rem, 3vh, 2rem);
+  color: var(--stone);
+  font-size: clamp(1.0625rem, 0.95rem + 0.45vw, 1.3125rem);
+  line-height: 1.5;
+  letter-spacing: -0.012em;
+  text-wrap: pretty;
+}
+
+/* ---------- Footer ---------- */
+
+.foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 2rem;
+  flex-wrap: wrap;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+  color: var(--ash);
+  font-size: 0.875rem;
+  letter-spacing: -0.005em;
+}
+
+.status {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.625rem;
+}
+
+.status strong {
+  color: var(--bone);
+  font-weight: 500;
+}
+
+.status-dot {
+  flex: none;
+  width: 0.4375rem;
+  height: 0.4375rem;
+  border-radius: 50%;
+  background: var(--ember);
+  box-shadow: 0 0 0 0.1875rem rgb(242 162 119 / 0.18);
+  transform: translateY(-0.0625rem);
+}
+
+.copy {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Motion ---------- */
+
+@media (prefers-reduced-motion: no-preference) {
+  .top,
+  h1,
+  .lede,
+  .foot {
+    animation: rise 0.9s var(--ease) both;
+  }
+
+  h1 {
+    animation-delay: 0.08s;
+  }
+
+  .lede {
+    animation-delay: 0.16s;
+  }
+
+  .foot {
+    animation-delay: 0.24s;
+  }
+
+  .status-dot {
+    animation: breathe 3.2s ease-in-out infinite;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+}
+
+@keyframes breathe {
+  50% {
+    box-shadow: 0 0 0 0.3125rem rgb(242 162 119 / 0.06);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .field,
+  .gh,
+  .gh-arrow {
+    transition: none;
+  }
+}
