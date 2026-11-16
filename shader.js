@@ -85,19 +85,21 @@
       float d = length((uv - corner) * vec2(1.0, 0.92));
       float light = smoothstep(1.18, 0.12, d);
       light *= light;
+      // Ease off in the corner itself, where the GitHub link sits.
+      light *= 0.66 + 0.34 * smoothstep(0.04, 0.5, d);
 
       // Folds: broad body from the warp, a sharper crest where it turns over.
       float body = smoothstep(0.22, 0.78, f);
       float crest = pow(clamp(1.0 - abs(r.x - r.y) * 3.2, 0.0, 1.0), 3.0);
       float v = body * (0.10 + 0.90 * light) + crest * 0.34 * light;
-      v *= 0.52 + 0.62 * light;
+      v *= 0.52 + 0.58 * light;
 
       vec3 col = INK;
       col = mix(col, SLATE, smoothstep(0.30, 0.75, q.y) * (0.30 + 0.45 * (1.0 - light)));
       col = mix(col, UMBER, smoothstep(0.02, 0.28, v));
       col = mix(col, SIENNA, smoothstep(0.22, 0.56, v));
       col = mix(col, APRICOT, smoothstep(0.52, 0.86, v));
-      col = mix(col, SAND, smoothstep(0.88, 1.16, v) * 0.85);
+      col = mix(col, SAND, smoothstep(0.88, 1.16, v) * 0.7);
 
       // Settle the edges, then dither to keep the dark gradients from banding.
       float vig = smoothstep(1.45, 0.35, length(uv - vec2(0.62, 0.58)) * 1.25);

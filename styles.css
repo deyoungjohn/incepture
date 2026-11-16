@@ -17,7 +17,7 @@
   --ash: #8a8178;
   --ember: #f2a277;
   --line: rgb(243 236 228 / 0.14);
-  --glass: rgb(12 10 9 / 0.62);
+  --glass: rgb(12 10 9 / 0.72);
 
   --gutter: clamp(1.25rem, 4vw, 3.5rem);
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -159,7 +159,7 @@ h1 {
 
 .gh:hover {
   border-color: rgb(242 162 119 / 0.6);
-  background: rgb(12 10 9 / 0.78);
+  background: rgb(12 10 9 / 0.86);
 }
 
 .gh:hover .gh-arrow {
