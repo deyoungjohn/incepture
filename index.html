@@ -4,17 +4,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-    <title>Incepture</title>
-    <meta name="description" content="Software for real people with real problems. Projects built in my free time.">
+    <title>Incepture — Independent Software</title>
+    <meta name="description" content="Software for real people with real problems. Independent tools built and published by Young John.">
     <meta name="author" content="Young John">
-    <meta name="color-scheme" content="dark">
-    <meta name="theme-color" content="#0c0a09">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#f5f2eb" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#11100f" media="(prefers-color-scheme: dark)">
     <link rel="canonical" href="https://incepture.dev/">
 
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://incepture.dev/">
-    <meta property="og:title" content="Incepture">
-    <meta property="og:description" content="Software for real people with real problems. Projects built in my free time.">
+    <meta property="og:title" content="Incepture — Independent Software">
+    <meta property="og:description" content="Software for real people with real problems. Independent tools built and published by Young John.">
     <meta property="og:image" content="https://incepture.dev/og.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -23,48 +24,203 @@
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="preload" href="fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="styles.css">
+    <script src="main.js" defer></script>
+    <script src="shader.js" defer></script>
   </head>
   <body>
-    <canvas class="field" id="field" aria-hidden="true"></canvas>
+    <a class="skip-link" href="#main-content">Skip to content</a>
 
-    <div class="page">
-      <header class="top">
-        <p class="brand">
-          <svg class="brand-mark" viewBox="0 0 20 20" aria-hidden="true">
-            <circle cx="10" cy="10" r="8.25" fill="none" stroke="currentColor" stroke-width="1.5" opacity=".45"/>
-            <circle cx="10" cy="10" r="3" fill="currentColor"/>
+    <header class="site-header" id="top">
+      <div class="container header-inner">
+        <a class="brand" href="#top" aria-label="Incepture home">
+          <svg class="brand-mark" viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="2.5" y="2.5" width="19" height="19" rx="5.5" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.35"/>
+            <circle cx="12" cy="12" r="4" fill="currentColor"/>
           </svg>
-          incepture
-        </p>
-
-        <a class="gh" href="https://github.com/deyoungjohn" rel="me noopener" aria-label="deyoungjohn on GitHub">
-          <svg class="gh-mark" viewBox="0 0 16 16" aria-hidden="true">
-            <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/>
-          </svg>
-          <span>GitHub</span>
-          <svg class="gh-arrow" viewBox="0 0 12 12" aria-hidden="true">
-            <path d="M3.5 8.5 8.5 3.5M4.25 3.5H8.5v4.25" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
+          <span class="brand-name">incepture</span>
+          <span class="brand-tld">.dev</span>
         </a>
-      </header>
 
-      <main class="hero">
-        <h1>Software for real people with real problems.</h1>
-        <p class="lede">
-          Incepture is where I publish what I build in my free time: small,
-          useful tools made for the people who need them.
-        </p>
-      </main>
+        <nav class="site-nav" aria-label="Primary">
+          <a class="nav-link" href="#principles">Principles</a>
+          <a class="nav-link" href="#index">Index</a>
+          <a class="nav-link" href="#colophon">Colophon</a>
+        </nav>
 
-      <footer class="foot">
-        <p class="status">
-          <span class="status-dot" aria-hidden="true"></span>
-          <span><strong>No projects yet.</strong> They&rsquo;ll show up here as they ship.</span>
-        </p>
-        <p class="copy">&copy; Young John 2026</p>
-      </footer>
-    </div>
+        <div class="header-actions">
+          <button
+            class="theme-toggle"
+            id="theme-toggle"
+            type="button"
+            aria-label="Toggle color theme"
+            aria-pressed="false"
+            title="Switch theme"
+          >
+            <svg class="icon-sun" viewBox="0 0 20 20" aria-hidden="true">
+              <circle cx="10" cy="10" r="3.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M10 2.25v2M10 15.75v2M2.25 10h2M15.75 10h2M4.52 4.52l1.41 1.41M14.07 14.07l1.41 1.41M15.48 4.52l-1.41 1.41M5.93 14.07l-1.41 1.41" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <svg class="icon-moon" viewBox="0 0 20 20" aria-hidden="true">
+              <path d="M15.9 12.6A6.5 6.5 0 0 1 7.4 4.1a6.5 6.5 0 1 0 8.5 8.5Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+            </svg>
+          </button>
 
-    <script src="shader.js" defer></script>
+          <a class="btn-github" id="header-github-link" href="https://github.com/deyoungjohn" rel="me noopener" aria-label="deyoungjohn on GitHub">
+            <svg class="gh-mark" viewBox="0 0 16 16" aria-hidden="true">
+              <path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/>
+            </svg>
+            <span>GitHub</span>
+            <svg class="arrow-icon" viewBox="0 0 12 12" aria-hidden="true">
+              <path d="M3.5 8.5 8.5 3.5M4.25 3.5H8.5v4.25" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Independent Software Workshop &mdash; Est. 2026</p>
+            <h1>Software for real people with real problems.</h1>
+            <p class="lede">
+              Incepture is where I publish what I build in my free time: small,
+              useful tools crafted with care for the people who actually need them.
+            </p>
+            <div class="hero-actions">
+              <a class="btn-primary" id="hero-github-cta" href="https://github.com/deyoungjohn" rel="me noopener">
+                <span>Follow on GitHub</span>
+                <svg class="arrow-icon" viewBox="0 0 12 12" aria-hidden="true">
+                  <path d="M3.5 8.5 8.5 3.5M4.25 3.5H8.5v4.25" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+              <a class="btn-secondary" id="hero-principles-cta" href="#principles">
+                <span>How it&rsquo;s built</span>
+                <svg class="down-icon" viewBox="0 0 12 12" aria-hidden="true">
+                  <path d="M6 2.5v7M3 6.75 6 9.75l3-3" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <figure class="hero-plate" aria-label="Interactive sculptural contour field">
+            <div class="plate-frame">
+              <canvas class="field" id="field" aria-hidden="true"></canvas>
+              <div class="plate-overlay" aria-hidden="true">
+                <span class="plate-tag">FIG. 01</span>
+                <span class="plate-coords" id="plate-coords">0.00, 0.00</span>
+              </div>
+            </div>
+            <figcaption class="plate-caption">
+              <span>Live WebGL contour study</span>
+              <span>Move pointer to warp field</span>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section" id="principles" aria-labelledby="principles-heading">
+        <div class="container">
+          <div class="section-head">
+            <span class="section-index">01</span>
+            <div>
+              <h2 id="principles-heading">Principles</h2>
+              <p class="section-sub">A few quiet rules that guide every tool published under Incepture.</p>
+            </div>
+          </div>
+
+          <ol class="principles-list">
+            <li class="principle-item">
+              <span class="principle-num">01</span>
+              <h3>Real utility first</h3>
+              <p>
+                Every project starts from a concrete, everyday friction&mdash;never a trend,
+                a growth hack, or a solution looking for a problem.
+              </p>
+            </li>
+            <li class="principle-item">
+              <span class="principle-num">02</span>
+              <h3>Small by design</h3>
+              <p>
+                Focused scope, fast load times, and calm interfaces that do one job well
+                and get out of your way.
+              </p>
+            </li>
+            <li class="principle-item">
+              <span class="principle-num">03</span>
+              <h3>Built in the open</h3>
+              <p>
+                Independent software written in free time, refined in the open, and
+                shared on GitHub as each piece is ready.
+              </p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section" id="index" aria-labelledby="index-heading">
+        <div class="container">
+          <div class="section-head">
+            <span class="section-index">02</span>
+            <div>
+              <h2 id="index-heading">Project Index</h2>
+              <p class="section-sub">A running catalog of shipped software. Entries appear here as they launch.</p>
+            </div>
+          </div>
+
+          <div class="ledger" role="region" aria-label="Project catalog">
+            <div class="ledger-header" aria-hidden="true">
+              <span>No.</span>
+              <span>Project</span>
+              <span>Status</span>
+              <span class="ledger-right">Year</span>
+            </div>
+
+            <div class="ledger-row ledger-empty">
+              <span class="ledger-num">001</span>
+              <div class="ledger-main">
+                <p class="ledger-title">No projects shipped yet.</p>
+                <p class="ledger-desc">
+                  The workshop is open and ideas are taking shape. New tools will be listed here
+                  with source links as soon as they ship.
+                </p>
+              </div>
+              <span class="ledger-status">
+                <span class="status-dot" aria-hidden="true"></span>
+                <span>In workshop</span>
+              </span>
+              <span class="ledger-year ledger-right">2026</span>
+            </div>
+          </div>
+
+          <div class="index-foot">
+            <p>Want to see work in progress before it lands here?</p>
+            <a class="inline-link" id="index-github-link" href="https://github.com/deyoungjohn" rel="me noopener">
+              <span>Watch @deyoungjohn on GitHub</span>
+              <svg class="arrow-icon" viewBox="0 0 12 12" aria-hidden="true">
+                <path d="M3.5 8.5 8.5 3.5M4.25 3.5H8.5v4.25" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" id="colophon">
+      <div class="container footer-inner">
+        <div class="footer-colophon">
+          <p class="footer-brand">Incepture</p>
+          <p class="footer-note">
+            Hand-coded static HTML, CSS &amp; WebGL. Self-hosted Inter typography. Zero frameworks, zero tracking.
+          </p>
+        </div>
+
+        <div class="footer-meta">
+          <a class="footer-link" href="https://github.com/deyoungjohn" rel="me noopener">github.com/deyoungjohn</a>
+          <p class="copy">&copy; Young John 2026</p>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>
